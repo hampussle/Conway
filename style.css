@@ -1,0 +1,67 @@
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.wrap {
+  flex: 8;
+}
+
+#navbar {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#sizeSlider {
+  display: flex;
+}
+
+#sliderSpan {
+  font-size: 18px;
+  align-self: center;
+}
+
+#home {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+
+button {
+  border: 1px solid darkgreen;
+  border-radius: 10%;
+  color: darkgreen;
+  background-color: white;
+  min-height: 25%;
+  min-width: 3%;
+  align-self: center;
+  transition: transform 0.2s;
+  margin-right: 10px;
+}
+
+button:hover {
+  color: green;
+  border-color: green;
+  transform: scale(2);
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  #home {
+    display: none;
+  }
+}

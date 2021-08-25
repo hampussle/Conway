@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icons/site.webmanifest" />
+    <script defer src="./Game.js"></script>
+    <title>Game of life</title>
+  </head>
+  <body onload="setup()">
+    <div class="wrap">
+      <header>
+        <div id="navbar">
+            <h2 id="home">John Conway's Game Of Life</h2>
+          <div id="sizeSlider">
+            <input
+              type="range"
+              min="5"
+              max="100"
+              value="50"
+              step="1"
+              id="slider"
+            />
+            <label for="slider" id="sliderSpan">Size: 50</label>
+          </div>
+            <button onclick="start()" id="go_btn">Start</button>
+            <button onclick="stop()" id="stop_btn">Stop</button>
+            <button onclick="reset()" id="reset_btn">Clear</button>
+            <button onclick="rng()" id="random_btn">Random</button>
+        </div>
+      </header>
+      <main id="main">
+        <canvas id="GOL" width="800" height="400"></canvas>
+      </main>
+    </div>
+  </body>
+</html>

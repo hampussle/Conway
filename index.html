@@ -31,15 +31,30 @@
         <div id="navbar">
           <h2 id="home">John Conway's Game Of Life</h2>
           <div id="sizeSlider">
-            <input
-              type="range"
-              min="5"
-              max="100"
-              value="50"
-              step="1"
-              id="slider"
-            />
-            <label for="slider" id="sliderSpan">Size: 50</label>
+            <div class="size">
+              <input
+                type="range"
+                min="5"
+                max="100"
+                value="20"
+                step="1"
+                id="slider"
+              />
+              <label for="slider" id="sliderSpan">Cell size: 20</label>
+            </div>
+            <div class="speed">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="20"
+                step="1"
+                id="speedSlider"
+              />
+              <label for="speedSlider" id="speedSliderSpan"
+                >Generations per second: 20</label
+              >
+            </div>
           </div>
           <div class="info">
             <p id="generations"></p>

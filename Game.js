@@ -1,7 +1,7 @@
 const canvas = document.getElementById('GOL')
 const context = canvas.getContext('2d')
-const slider = document.querySelector('#slider')
-const sliderText = document.querySelector('#sliderSpan')
+const sizeSlider = document.querySelector('#slider')
+const speedSlider = document.querySelector('#speedSlider')
 const generationsText = document.querySelector('#generations')
 const cellsText = document.querySelector('#cells')
 
@@ -10,12 +10,13 @@ let cols
 let size = 20
 let generations = 0
 let aliveCells = 0
+let speed = 75
 
+let darkModeEnabled = false
 let clicked = false
 let grid
 let next
 let interval
-let canvasInterval
 
 function nextGeneration() {
   for (let y = 0; y < cols; y++) {
@@ -72,7 +73,7 @@ function start() {
   if (aliveCells == 0) rng()
   interval = setInterval(() => {
     makeNext()
-  }, 100)
+  }, speed)
 }
 
 function stop() {
@@ -166,7 +167,7 @@ function getRandomColour() {
 
 function updateText() {
   cellsText.innerHTML = 'Alive cells: ' + aliveCells
-  generationsText.innerHTML = 'Number of generations: ' + generations
+  generationsText.innerHTML = 'Generations: ' + generations
 }
 
 function clickCell(x, y) {
@@ -214,13 +215,17 @@ canvas.addEventListener('mousemove', (e) => {
   }
 })
 
-closeIcon.addEventListener('click', (e) => {
-  closeIcon.classList.add('hidden')
-})
+sizeSlider.oninput = () => {
+  size = parseInt(sizeSlider.value)
+  document.querySelector('#sliderSpan').innerHTML = 'Cell size: ' + size
+  stop()
+  setup()
+}
 
-slider.oninput = () => {
-  size = parseInt(slider.value)
-  sliderText.innerHTML = 'size: ' + size
+speedSlider.oninput = () => {
+  speed = 1000 / parseInt(speedSlider.value)
+  document.querySelector('#speedSliderSpan').innerHTML =
+    'Generations per second: ' + 1 / (speed / 1000)
   stop()
   setup()
 }

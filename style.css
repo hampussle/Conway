@@ -18,12 +18,25 @@ body {
 
 #sizeSlider {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   order: 2;
 }
 
-#sliderSpan {
-  font-size: 18px;
-  align-self: center;
+#sizeSlider {
+  margin: 0;
+}
+
+#sliderSpan, #speedSliderSpan {
+  font-size: 16px;
+  margin-left: 5%;
+}
+
+.speed, .size {
+display: flex;
+justify-content: flex-start;
+align-content: center;
+margin: 0;
 }
 
 #home {
@@ -86,7 +99,23 @@ body {
 
 .info > p {
   margin: 5;
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.pageColors, .cellColors {
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.pageColors {
+  order: 5;
+}
+
+.cellColors {
+  order: 6;
 }
 
 .buttons {
@@ -129,6 +158,11 @@ main {
 
 .hidden {
   display: none;
+}
+
+.darkMode {
+  background-color: black;
+  color: #7e89c4;
 }
 
 @media screen and (max-width: 960px) {

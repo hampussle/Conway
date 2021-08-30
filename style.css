@@ -18,6 +18,7 @@ body {
 
 #sizeSlider {
   display: flex;
+  order: 2;
 }
 
 #sliderSpan {
@@ -29,14 +30,11 @@ body {
   text-align: center;
   justify-self: center;
   align-self: center;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-evenly;
+  order: 1;
 }
 
 .info {
+  order: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -47,6 +45,12 @@ body {
 .info > p {
   margin: 5;
   font-size: 18px;
+}
+
+.buttons {
+  order: 4;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 button {

@@ -2,18 +2,22 @@ const canvas = document.getElementById('GOL')
 const context = canvas.getContext('2d')
 const slider = document.querySelector('#slider')
 const sliderText = document.querySelector('#sliderSpan')
+const generationsText = document.querySelector('#generations')
+const cellsText = document.querySelector('#cells')
 
 let rows
 let cols
 let size = 20
+let generations = 0
+let aliveCells = 0
+
 let clicked = false
-let clickedAfterReset = true
 let grid
 let next
 let interval
 
 canvas.addEventListener('mousedown', function (e) {
-  var cords = getCords(e)
+  let cords = getCords(e)
   clickCell(cords.x, cords.y)
   clicked = true
 })
@@ -25,7 +29,7 @@ canvas.addEventListener('mouseleave', function () {
 })
 canvas.addEventListener('mousemove', function (e) {
   if (clicked) {
-    var cords = getCords(e)
+    let cords = getCords(e)
     clickCell(cords.x, cords.y)
   }
 })
@@ -67,26 +71,30 @@ function makeNext() {
     grid = makeGrid()
     makeRandomGrid()
   }
+  generations++
+  aliveCells = 0
   nextGeneration()
   grid = next
+  updateText()
   draw()
 }
 function makeRandomGrid() {
-  for (var y = 0; y < cols; y++) {
-    for (var x = 0; x < rows; x++) {
+  generations = 0
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
       grid[y][x] = Math.round(Math.random())
     }
   }
 }
-function rng(){
-    makeRandomGrid();
-    makeNext();
+function rng() {
+  makeRandomGrid()
+  makeNext()
 }
 function draw() {
-  for (var y = 0; y < cols; y++) {
-    for (var x = 0; x < rows; x++) {
-      var i = y * size
-      var j = x * size
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
+      let i = y * size
+      let j = x * size
       if (grid[y][x] == 1) {
         drawCell(j, i)
       }
@@ -94,11 +102,12 @@ function draw() {
   }
 }
 function nextGeneration() {
-  for (var y = 0; y < cols; y++) {
-    for (var x = 0; x < rows; x++) {
-      var alive = countAlive(y, x)
-      var currentState = grid[y][x]
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
+      let alive = countAlive(y, x)
+      let currentState = grid[y][x]
       if (currentState == 1) {
+        aliveCells++
         if (alive == 3 || alive == 2) next[y][x] = 1
         else if (alive <= 1 || alive >= 4) next[y][x] = 0
       } else {
@@ -109,12 +118,12 @@ function nextGeneration() {
   }
 }
 function countAlive(y, x) {
-  var alive = 0
-  for (var i = -1; i < 2; i++) {
-    for (var j = -1; j < 2; j++) {
+  let alive = 0
+  for (let i = -1; i < 2; i++) {
+    for (let j = -1; j < 2; j++) {
       if (i == 0 && j == 0) continue
-      var col = (y + i + cols) % cols
-      var row = (x + j + rows) % rows
+      let col = (y + i + cols) % cols
+      let row = (x + j + rows) % rows
       alive += grid[col][row]
     }
   }
@@ -126,19 +135,22 @@ function clearCanvas() {
 function reset() {
   stop()
   clearCanvas()
+  generations = 0
+  aliveCells = 0
+  updateText()
   grid = emptyGrid()
 }
 function makeGrid() {
-  var arr = new Array(cols)
-  for (var y = 0; y < cols; y++) {
+  let arr = new Array(cols)
+  for (let y = 0; y < cols; y++) {
     arr[y] = new Array(rows)
   }
   return arr
 }
 function emptyGrid() {
-  var arr = makeGrid()
-  for (var y = 0; y < cols; y++) {
-    for (var x = 0; x < rows; x++) {
+  let arr = makeGrid()
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
       arr[y][x] = 0
     }
   }
@@ -152,25 +164,29 @@ function drawCell(x, y) {
   context.stroke()
 }
 function getRandomColour() {
-  var red = Math.floor(Math.random() * 255)
-  var green = Math.floor(Math.random() * 255)
-  var blue = Math.floor(Math.random() * 255)
+  let red = Math.floor(Math.random() * 255)
+  let green = Math.floor(Math.random() * 255)
+  let blue = Math.floor(Math.random() * 255)
   return 'rgb(' + red + ',' + green + ',' + blue + ' )'
 }
+function updateText() {
+  cellsText.innerHTML = 'Alive cells: ' + aliveCells
+  generationsText.innerHTML = 'Number of generations: ' + generations
+}
 function clickCell(x, y) {
-  var cell = returnCellCords(x, y)
-  var cellPos = returnCellPosition(cell)
+  let cell = returnCellCords(x, y)
+  let cellPos = returnCellPosition(cell)
   grid[cell.y][cell.x] = 1
   drawCell(cellPos.x, cellPos.y)
 }
 function returnCellCords(x, y) {
-  var row = Math.floor(x / size)
-  var col = Math.floor(y / size)
+  let row = Math.floor(x / size)
+  let col = Math.floor(y / size)
   return { x: row, y: col }
 }
 function returnCellPosition(cell) {
-  var row = cell.x * size
-  var col = cell.y * size
+  let row = cell.x * size
+  let col = cell.y * size
   return { x: row, y: col }
 }
 function getCords(event) {

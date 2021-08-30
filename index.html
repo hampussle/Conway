@@ -29,7 +29,7 @@
     <div class="wrap">
       <header>
         <div id="navbar">
-            <h2 id="home">John Conway's Game Of Life</h2>
+          <h2 id="home">John Conway's Game Of Life</h2>
           <div id="sizeSlider">
             <input
               type="range"
@@ -41,10 +41,16 @@
             />
             <label for="slider" id="sliderSpan">Size: 50</label>
           </div>
+          <div class="info">
+            <p id="generations"></p>
+            <p id="cells"></p>
+          </div>
+          <div class="buttons">
             <button onclick="start()" id="go_btn">Start</button>
             <button onclick="stop()" id="stop_btn">Stop</button>
             <button onclick="reset()" id="reset_btn">Clear</button>
             <button onclick="rng()" id="random_btn">Random</button>
+          </div>
         </div>
       </header>
       <main id="main">

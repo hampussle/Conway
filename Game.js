@@ -15,6 +15,7 @@ let clicked = false
 let grid
 let next
 let interval
+let canvasInterval
 
 function nextGeneration() {
   for (let y = 0; y < cols; y++) {
@@ -69,10 +70,9 @@ function updateCanvas() {
 function start() {
   stop()
   if (aliveCells == 0) rng()
-  interval = setInterval(function () {
+  interval = setInterval(() => {
     makeNext()
   }, 100)
-  return interval
 }
 
 function stop() {
@@ -214,9 +214,21 @@ canvas.addEventListener('mousemove', (e) => {
   }
 })
 
+closeIcon.addEventListener('click', (e) => {
+  closeIcon.classList.add('hidden')
+})
+
 slider.oninput = () => {
   size = parseInt(slider.value)
   sliderText.innerHTML = 'size: ' + size
   stop()
   setup()
+}
+
+document.querySelector('#closeIcon').addEventListener('click', () => {
+  document.querySelector('.welcome').classList.add('hidden')
+})
+
+window.onresize = () => {
+  updateCanvas()
 }

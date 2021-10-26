@@ -225,7 +225,7 @@ sizeSlider.oninput = () => {
 speedSlider.oninput = () => {
   speed = 1000 / parseInt(speedSlider.value)
   document.querySelector('#speedSliderSpan').innerHTML =
-    'Generations per second: ' + 1 / (speed / 1000)
+    'Generations per second: ' + Math.round(1 / (speed / 1000))
   stop()
   setup()
 }

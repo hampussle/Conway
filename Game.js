@@ -12,7 +12,6 @@ let generations = 0
 let aliveCells = 0
 let speed = 75
 
-let darkModeEnabled = false
 let clicked = false
 let grid
 let next
